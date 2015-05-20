@@ -9,26 +9,18 @@ extern "C" {
 #endif
 /*
  * Class:     com_advantech_advnfc_AdvNFC
- * Method:    doInit
- * Signature: ()V
+ * Method:    loadKey
+ * Signature: ()Z
  */
-JNIEXPORT void JNICALL Java_com_advantech_advnfc_AdvNFC_doInit
+JNIEXPORT jboolean JNICALL Java_com_advantech_advnfc_AdvNFC_loadKey
   (JNIEnv *, jobject);
 
 /*
  * Class:     com_advantech_advnfc_AdvNFC
- * Method:    scan
+ * Method:    readCard
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_advantech_advnfc_AdvNFC_scan
-  (JNIEnv *, jobject);
-
-/*
- * Class:     com_advantech_advnfc_AdvNFC
- * Method:    close
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_advantech_advnfc_AdvNFC_close
+JNIEXPORT jstring JNICALL Java_com_advantech_advnfc_AdvNFC_readCard
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

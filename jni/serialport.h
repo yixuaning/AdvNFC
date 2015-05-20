@@ -12,7 +12,29 @@ static const char *TAG="advnfc_jni";
 #define ALOGD(fmt, args...) __android_log_print(ANDROID_LOG_DEBUG, TAG, fmt, ##args)
 #define ALOGE(fmt, args...) __android_log_print(ANDROID_LOG_ERROR, TAG, fmt, ##args)
 
-#define 	BUFFER_SIZE		1024
+#define 	BUFFER_SIZE		32
+#define		UART_PORT		"/dev/ttymxc1"
+
+//定义通信帧常量
+#define		STX			0x20
+#define		ETX			0x03
+
+//定义数据块格式的位置
+#define		SEQNR                   1          //数据交换包的序号
+#define		COMMAND                 2          //命令字符
+#define		STATUS                  2          //状态字符
+#define		LENGTH                  3          //数据的长度
+#define		DATA                    4          //数据字节
+
+//定义命令
+unsigned char loadKeyCmd[] = { 0x20, 0x00, 0x4C, 0x08, 0x00, 0x00, 0xFF, 0xFF,
+		0xFF, 0xFF, 0xFF, 0xFF, 0xBB, 0x03 };
+unsigned char loadKeyRtn[] = { 0x06, 0x20, 0x00, 0x00, 0x00, 0xFF, 0x03 };
+unsigned char getCardSnrCmd[] = { 0x20, 0x00, 0x10, 0x01, 0x00, 0xee, 0x03 };
+unsigned char authCmd[] =
+		{ 0x20, 0x00, 0x72, 0x03, 0x00, 0x00, 0x00, 0x8e, 0x03 };
+unsigned char readDataCmd[] = { 0x20, 0x00, 0x46, 0x01, 0x02, 0xba, 0x03 };
+const int DATACOUNT = 23;
 
 int open_port(char* com_port)
 {
@@ -141,4 +163,3 @@ int set_com_config(int fd,int baud_rate, int data_bits, char parity, int stop_bi
 
     return 0;
 }
-
